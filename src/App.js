@@ -2,13 +2,17 @@ import React, { Component } from "react";
 import photo from "./images/large-round.png";
 import "photonkit/dist/css/photon.css";
 import "./App.css";
+import { observable, computed, action } from "mobx";
 
 class Model {
+  @observable
   videos = [
     { source : "https://www.youtube.com/embed/NCXfKyfpBKI?ecver=1&autoplay=1&controls=0&showinfo=0&rel=0&modestbranding=1", title : "Deep End" },
     { source : "https://www.youtube.com/embed/lBN9VDFDvOk?ecver=1&autoplay=1&controls=0&showinfo=0&rel=0&modestbranding=1", title : "Heart Stop" },
     { source : "https://www.youtube.com/embed/zeP7bqMySmE?ecver=1&autoplay=1&controls=0&showinfo=0&rel=0&modestbranding=1", title : "Strangled Love" }
   ];
+
+  @observable 
   currentVideo = this.videos[0];
 }
 
