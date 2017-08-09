@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import { observable, computed, action, autorun } from "mobx";
+import { observer } from "mobx-react"
 import photo from "./images/large-round.png";
 import "photonkit/dist/css/photon.css";
 import "./App.css";
-import { observable, computed, action } from "mobx";
 
 class Model {
   @observable
@@ -16,6 +17,7 @@ class Model {
   currentVideo = this.videos[0];
 }
 
+@observer
 class DeepEnd extends Component {
   windowStyle = { cursor: "pointe" }
   paneStyle = { overflowY: "visible", borderLeft: "none" }
@@ -63,18 +65,17 @@ class DeepEnd extends Component {
   }
 }
 
+@observer
 class App extends Component {
+  model = new Model()
   constructor(props) {
     super(props);
-    this.state = new Model();
+    this.state = this.model; 
     this.play = this.play.bind(this)
   }
 
   play(video) {
-    this.setState({
-      videos : this.state.videos,
-      currentVideo : video
-    });
+    this.model.currentVideo = video;
   }
 
   render() {
